@@ -1,7 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * CSC 422 Software Engineering
+ * Concordia University-St Paul
+ * Summer 2022
+ * Instructor: James Tucker
+ *
+ * Assignment 1
+ * Pet Database
+ * Lisa Ahnell
+ * ahnelll@csp.edu
+ * 05/15/2022
  */
 package csc422assignment1ahnell;
 
@@ -30,6 +37,46 @@ public class PetDatabase {
         this.pets.add(pet);
     }
     
+    /**
+     * Search PetDatabase for Pets with specified name, return a PetDatabase of matches.
+     * Name search term is case insensitive.
+     * @param name
+     * @return PetDatabase nameMatches
+     */
+    public PetDatabase findPetByName(String name) {
+        // List to hold Pets matching the search term
+        PetDatabase nameMatches = new PetDatabase();
+        
+        // Check for matches in the Pet Database
+        for (Pet p: pets) {
+            if (p.getName().equalsIgnoreCase(name)) {
+                // Match found, add to nameMatches
+                nameMatches.addPet(p);
+            }
+        }
+        // Return nameMatches
+        return nameMatches;
+        
+    }
+    
+    /**
+     * Search PetDatabase for Pets with specified age, return a PetDatabase of matches.
+     * @param age
+     * @return PetDatabase ageMatches
+     */
+    public PetDatabase findPetByAge(int age) {
+        // List to hold Pets matching target age
+        PetDatabase ageMatches = new PetDatabase();
+        
+        // Check for matches in the PetDatabase
+        for (Pet p: pets) {
+            if(p.getAge() == age) {
+                // Match found, add to ageMatches
+                ageMatches.addPet(p);
+            }
+        }
+        return ageMatches;
+    }
     /**
      * Display contents of PetDatabase in a formatted table.
      */

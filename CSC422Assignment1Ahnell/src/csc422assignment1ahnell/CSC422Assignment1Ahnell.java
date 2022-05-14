@@ -1,11 +1,17 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * CSC 422 Software Engineering
+ * Concordia University-St Paul
+ * Summer 2022
+ * Instructor: James Tucker
+ *
+ * Assignment 1
+ * Pet Database
+ * Lisa Ahnell
+ * ahnelll@csp.edu
+ * 05/15/2022
  */
 package csc422assignment1ahnell;
 
-import java.lang.reflect.Array;
 import java.util.Scanner;
 
 /**
@@ -24,6 +30,16 @@ public class CSC422Assignment1Ahnell {
 
         // New Pet Database for the program
         PetDatabase myPets = new PetDatabase();
+        
+        // Sample Pet data, hard coded for simplicity
+        myPets.addPet(new Pet("Piggles", 4));
+        myPets.addPet(new Pet("Socrates", 12));
+        myPets.addPet(new Pet("Jake", 4));
+        myPets.addPet(new Pet("Bonnie", 12));
+        myPets.addPet(new Pet("Bonnie", 3));
+        myPets.addPet(new Pet("Saul", 18));
+        myPets.addPet(new Pet("Pasha", 1));
+
 
         // Display menu to user to select pet database options
         boolean useDatabase = true;
@@ -33,7 +49,6 @@ public class CSC422Assignment1Ahnell {
             // Take input from user for menu selection
             Scanner input = new Scanner(System.in);
             String menuChoice = input.nextLine();
-            // Strings for search terms to come later
             
             // Direct program according to menuChoice
             switch (menuChoice) {
@@ -66,8 +81,8 @@ public class CSC422Assignment1Ahnell {
                             myPets.addPet(newPet);
                             petCount++;
                         } catch (Exception ex) {
-                            System.err.println("Unable to store this pet Data: " + petData.toString());
-                            return;
+                            System.err.println("\nUnable to store this pet Data: " + petData.toString());
+                            break;
                         }
                     }
                     break;
@@ -76,8 +91,35 @@ public class CSC422Assignment1Ahnell {
                 case "4": // Remove existing pet
                     break;
                 case "5": // Search by name
+                    // Implemented for release 2
+                    System.out.print("\nEnter a name to search: ");
+                    // Name to search for
+                    String targetName = input.nextLine();
+                    try {
+                        PetDatabase nameMatches = myPets.findPetByName(targetName);
+                        nameMatches.showPets();
+                    } catch (Exception ex) {
+                        System.err.println("\nUnable to search for pet name: " + targetName);
+                        break;
+                    }
+                    
                     break;
                 case "6": // Search by age
+                    // Implemented for release 2
+
+                    System.out.print("\nEnter age to search: ");
+                    String searchTerm = input.nextLine();
+                    try {
+                        // Age to search for
+                        int targetAge = Integer.parseInt(searchTerm);
+                        PetDatabase ageMatches = myPets.findPetByAge(targetAge);
+                        ageMatches.showPets();
+
+                    } catch (Exception ex) {
+                        System.err.println("\nUnable to search for pet age: " + searchTerm);
+                        break;
+                    }
+                    
                     break;
                 case "7": // Exit
                     // Implemented for release 1
@@ -100,8 +142,8 @@ public class CSC422Assignment1Ahnell {
         System.out.println("2) Add more pets");
         //System.out.println("3) Update an existing pet");
         //System.out.println("4) Remove an existing pet");
-        //System.out.println("5) Search pets by name");
-        //System.out.println("6) Search pets by age");
+        System.out.println("5) Search pets by name");
+        System.out.println("6) Search pets by age");
         System.out.println("7) Exit program\n");
         System.out.print("Your choice: ");
     }

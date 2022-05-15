@@ -11,5 +11,7 @@ Implemented menu functionality, with View all pets, Add more pets and Exit progr
 Release 2: 2022.05.14 17:22pm
 Allow user to search pets by name or age, some updates to comments
 
-Release 3:
-Planned: Allow user to update and remove existing pets
+Release 3: 2022.05.14 22:16pm
+Allow user to update and remove existing pets.
+Adjustments to table formatting.
+Changed handling of error messages.

@@ -77,6 +77,47 @@ public class PetDatabase {
         }
         return ageMatches;
     }
+    
+    public Pet findPetById(int id) {
+        try {
+            return this.pets.get(id);
+        } catch (Exception ex) {
+            //System.err.println("\nUnable to find pet with ID: " + id);
+            return null;
+        }     
+    }
+    
+    /**
+     * Remove pet with id(index) specified.
+     * @param id 
+     */
+    public void removePet(int id) {
+        try {
+            if (0 <= id && id<= this.pets.size()) {
+                // id is within bounds
+                this.pets.remove(id);
+            }
+        } catch (Exception ex) {
+            //System.err.println("\nUnable to remove pet with id: " + id);
+        }
+    }
+    
+    public Pet updatePet(int id, String name, int age) {
+        try {
+            if (0 <= id && id<= this.pets.size()) {
+                Pet oldPetData = this.pets.get(id);
+                // id is within bounds
+                this.pets.get(id).setName(name);
+                this.pets.get(id).setAge(age);
+                
+                return oldPetData;
+            }    
+        } catch (Exception ex) {
+            //System.err.println("\nUnable to update pet with id: " + id);
+            
+        }
+        return null;
+    }
     /**
      * Display contents of PetDatabase in a formatted table.
      */
@@ -93,7 +134,7 @@ public class PetDatabase {
     
     private static void printHeader(int width) {
         printDivider(width);
-        System.out.printf("%s%-3s%s%-10s%s%-4s%s", "|", "ID", "|", "NAME", "|", "AGE", "|");
+        System.out.printf("%s%-3s%s%-10s%s%-3s%s", "| ", "ID", "| ", "NAME", "| ", "AGE", " |");
         System.out.println();
         printDivider(width);
     }
@@ -106,7 +147,7 @@ public class PetDatabase {
             int age = pets.get(i).getAge();
             
             // Display as a table row
-            System.out.printf("%s%3d%s%10s%s%4d%s", "|", id, "|", name, "|", age, "|");
+            System.out.printf("%s%3d%s%-10s%s%4d%s", "|", id, " | ", name, "|", age, " |");
             System.out.println();
         }
     
@@ -121,7 +162,7 @@ public class PetDatabase {
     
     private static void printDivider(int width) {
         System.out.print("+");
-        for (int i = 0; i < width - 2; i++) {
+        for (int i = 0; i <= width; i++) {
             System.out.print("-");
         }
         System.out.print("+");

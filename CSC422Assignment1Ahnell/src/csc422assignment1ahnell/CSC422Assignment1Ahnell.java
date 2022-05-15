@@ -49,7 +49,7 @@ public class CSC422Assignment1Ahnell {
             // Take input from user for menu selection
             Scanner input = new Scanner(System.in);
             String menuChoice = input.nextLine();
-            
+            String searchTerm;
             // Direct program according to menuChoice
             switch (menuChoice) {
                 case "1": // View all pets
@@ -81,14 +81,63 @@ public class CSC422Assignment1Ahnell {
                             myPets.addPet(newPet);
                             petCount++;
                         } catch (Exception ex) {
-                            System.err.println("\nUnable to store this pet Data: " + petData.toString());
+                            System.out.println("\nUnable to store this pet Data: " + petInfo);
                             break;
                         }
                     }
                     break;
                 case "3": // Update existing pet
+                    // Implemented for release 3
+
+                    myPets.showPets();
+                    System.out.print("\nEnter the pet ID to update: ");
+                    searchTerm = input.nextLine();
+                    try {
+                        // ID to search for
+                        int targetID = Integer.parseInt(searchTerm);
+                        String oldName = myPets.findPetById(targetID).getName();
+                        int oldAge = myPets.findPetById(targetID).getAge();
+                        //Pet targetPet = myPets.findPetById(targetID);
+                        
+                        // New name and age
+                        // New Pet info from user input
+                        System.out.print("\nEnter the new name and new age: ");
+
+                        String petInfo = input.nextLine();
+                        
+                        String[] petData = petInfo.split(" ", 2);
+                        try {
+                            myPets.updatePet(targetID, petData[0], Integer.parseInt(petData[1]));
+                        } catch (Exception ex) {
+                            System.out.println("\nUnable to add new information: " + petInfo);
+                            break;
+                        }
+                        
+                        System.out.printf("%s%d%s", oldName + " ", oldAge, " is changed to " + petData[0] + " " + petData[1] + ".\n");
+                       
+                    } catch (Exception ex) {
+                        System.out.println("\nUnable to update pet with ID: " + searchTerm);
+                        break;
+                    }
                     break;
                 case "4": // Remove existing pet
+                    // Implemented for release 3
+
+                    myPets.showPets();
+                    System.out.print("\nEnter the pet ID to remove: ");
+                    searchTerm = input.nextLine();
+                    try {
+                        // Age to search for
+                        int targetID = Integer.parseInt(searchTerm);
+                        Pet targetPet = myPets.findPetById(targetID);
+                        myPets.removePet(targetID);
+                        System.out.printf("%s%d%s", targetPet.getName() + " ", targetPet.getAge(), " is removed.\n");
+                        //break;
+                       
+                    } catch (Exception ex) {
+                        System.out.println("\nUnable to remove pet with ID: " + searchTerm);
+                        break;
+                    }
                     break;
                 case "5": // Search by name
                     // Implemented for release 2
@@ -108,7 +157,7 @@ public class CSC422Assignment1Ahnell {
                     // Implemented for release 2
 
                     System.out.print("\nEnter age to search: ");
-                    String searchTerm = input.nextLine();
+                    searchTerm = input.nextLine();
                     try {
                         // Age to search for
                         int targetAge = Integer.parseInt(searchTerm);
@@ -116,7 +165,7 @@ public class CSC422Assignment1Ahnell {
                         ageMatches.showPets();
 
                     } catch (Exception ex) {
-                        System.err.println("\nUnable to search for pet age: " + searchTerm);
+                        System.out.println("\nUnable to search for pet age: " + searchTerm);
                         break;
                     }
                     
@@ -140,8 +189,8 @@ public class CSC422Assignment1Ahnell {
         System.out.println("\nWhat would you like to do?");
         System.out.println("1) View all pets");
         System.out.println("2) Add more pets");
-        //System.out.println("3) Update an existing pet");
-        //System.out.println("4) Remove an existing pet");
+        System.out.println("3) Update an existing pet");
+        System.out.println("4) Remove an existing pet");
         System.out.println("5) Search pets by name");
         System.out.println("6) Search pets by age");
         System.out.println("7) Exit program\n");

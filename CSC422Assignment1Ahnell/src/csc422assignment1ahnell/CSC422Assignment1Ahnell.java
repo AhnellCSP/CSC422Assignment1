@@ -12,7 +12,11 @@
  */
 package csc422assignment1ahnell;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,19 +32,44 @@ public class CSC422Assignment1Ahnell {
         System.out.println("Submitted by Lisa Ahnell - ahnelll@csp.edu\n"
                 + "I certify that this is my own work\n\n");
 
-        // New Pet Database for the program
-        PetDatabase myPets = new PetDatabase();
+
+        
+        /*
+         * Added for Week 2: Load pet data from file. 
+         * 
+         * Attempt to read data from PetData.txt file.
+         * If file does not exist, create file with that name.
+         */
+        
+        String filename = "PetData.txt";
+        File file = new File(filename);
+        // if the file does not exist, create a new one
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException ex) {
+                System.out.println("Unable to create new file with name " + filename);
+            }
+        }
+        
+        // Testing checks for file
+        System.out.println("Does PetData.txt exist?" + file.exists());
+        System.out.println("Can PetData.txt be read?" + file.canRead());
+        System.out.println("Can PetData.txt be written?" + file.canWrite());
+
         
         // Sample Pet data, hard coded for simplicity
-        myPets.addPet(new Pet("Piggles", 4));
-        myPets.addPet(new Pet("Socrates", 12));
-        myPets.addPet(new Pet("Jake", 4));
-        myPets.addPet(new Pet("Bonnie", 12));
-        myPets.addPet(new Pet("Bonnie", 3));
-        myPets.addPet(new Pet("Saul", 18));
-        myPets.addPet(new Pet("Pasha", 1));
+//        myPets.addPet(new Pet("Piggles", 4));
+//        myPets.addPet(new Pet("Socrates", 12));
+//        myPets.addPet(new Pet("Jake", 4));
+//        myPets.addPet(new Pet("Bonnie", 12));
+//        myPets.addPet(new Pet("Bonnie", 3));
+//        myPets.addPet(new Pet("Saul", 18));
+//        myPets.addPet(new Pet("Pasha", 1));
 
-
+        // New Pet Database for the program--Changed to read data from file
+        PetDatabase myPets = new PetDatabase(file);
+        
         // Display menu to user to select pet database options
         boolean useDatabase = true;
         while (useDatabase) {

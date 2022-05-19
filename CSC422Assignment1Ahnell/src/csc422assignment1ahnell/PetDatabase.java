@@ -12,8 +12,14 @@
  */
 package csc422assignment1ahnell;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,6 +33,14 @@ public class PetDatabase {
     }
     public PetDatabase(List pets) {
         this.pets = pets;
+    }
+    public PetDatabase(File file) {
+        try {
+            this.pets = loadPets(file);
+
+        } catch (Exception ex) {
+            System.out.println("Problem loading pets from file.");
+        }
     }
     
     /**
@@ -167,6 +181,70 @@ public class PetDatabase {
         }
         System.out.print("+");
         System.out.println();
+    }
+    
+    /*
+     * Method for reading file, processing lines from file into Pet
+     * Pet name is a string, pet age is an int. 
+     * Delimiter in file is "|".
+     *
+     * @param file - File object to read Pets from
+     *
+     * @return - ArrayList of Pets read from each line of the file
+     *
+     * @throws Exception - if the Scanner is not able to read the File
+     */
+    private static List<Pet> loadPets(File file) throws Exception {
+
+        List<Pet> pets = new ArrayList<>();
+        try (Scanner input = new Scanner(file)) {
+           
+            while (input.hasNext()) {
+                // Process lines from the file into two data point, create new
+                // Band object with those values, add to bands
+                // Each line of file has band name | set time
+                String currentLine = input.nextLine();
+                String[] currentProperties = currentLine.split("\\|");
+
+                // Create a Band with currentProperties[0] as bandName and
+                // currentProperties[1] as setTime
+                if (currentProperties.length == 2) {
+                    Pet newPet = new Pet(currentProperties[0], Integer.parseInt(currentProperties[1]));
+                    pets.add(newPet);
+                }
+
+            }
+            input.close();
+        } catch (java.io.IOException ex) {
+            // Cannot load given file, report error
+            System.out.println("I/0 errors: no such file");
+            
+        }
+        return pets;
+    }
+    
+    private void savePets(File file) {
+        PrintWriter output = null;
+        try {
+            if (file.exists()) {
+                System.out.println("Current pet data will be overwritten");
+            }   
+            output = new PrintWriter(file);
+            // Write all Pets in PetDatabase to file
+            for(Pet p: pets) {
+                // Add name to file
+                output.print(p.getName());
+                // Add delimiter
+                output.print("|");
+                // Add age to file, end of line of pet data
+                output.println(p.getAge());
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("File not found, unable to save Pet data.");
+        } finally {
+            output.close();
+        }
+        
     }
     
 }

@@ -5,10 +5,14 @@
  * Instructor: James Tucker
  *
  * Assignment 1
+ * Assignment 2
  * Pet Database
  * Lisa Ahnell
  * ahnelll@csp.edu
  * 05/15/2022
+ * 
+ * Modified:
+ * 05/19/2022: Added load from file functionality
  */
 package csc422assignment1ahnell;
 
@@ -18,8 +22,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

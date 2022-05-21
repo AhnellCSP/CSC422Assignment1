@@ -21,6 +21,8 @@ import java.util.Objects;
 public class Pet {
     private String name;
     private int age;
+    private static final int minAge = 1;
+    private static final int maxAge = 20;
 
     /**
      * Constructor for Pet class. Create instance of Pet with given name and age.
@@ -28,8 +30,11 @@ public class Pet {
      * @param age 
      */
     public Pet(String name, int age) {
+
         this.name = name;
-        this.age = age;
+        //this.age = age;
+        this.setAge(age);
+        
     }
 
     /**
@@ -49,6 +54,20 @@ public class Pet {
     }
 
     /**
+     * Check if specified value for age is within age limits of Pet
+     * @param age
+     * @return true if within age range, false if not
+     */
+    public boolean checkAge(int age) {
+        if (this.minAge <= age && age <= this.maxAge) {
+            return true;
+        } else {
+            System.err.println("Error: " + age + " is not a valid age.");
+            return false;
+        }
+        //return (minAge <= age && age <= maxAge);
+    }
+    /**
      * Return age value of calling Pet object.
      * @return 
      */
@@ -61,7 +80,9 @@ public class Pet {
      * @param age 
      */
     public void setAge(int age) {
-        this.age = age;
+
+            this.age = age;
+
     }
 
     /**

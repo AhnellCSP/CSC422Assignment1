@@ -58,15 +58,6 @@ public class CSC422Assignment1Ahnell {
         //System.out.println("Can PetData.txt be read?" + file.canRead());
         //1System.out.println("Can PetData.txt be written?" + file.canWrite());
 
-        
-        // Sample Pet data, hard coded for simplicity
-//        myPets.addPet(new Pet("Piggles", 4));
-//        myPets.addPet(new Pet("Socrates", 12));
-//        myPets.addPet(new Pet("Jake", 4));
-//        myPets.addPet(new Pet("Bonnie", 12));
-//        myPets.addPet(new Pet("Bonnie", 3));
-//        myPets.addPet(new Pet("Saul", 18));
-//        myPets.addPet(new Pet("Pasha", 1));
 
         // New Pet Database for the program--Changed to read data from file
         PetDatabase myPets = new PetDatabase(file);
@@ -108,8 +99,10 @@ public class CSC422Assignment1Ahnell {
                         // try to create new Pet from tokens
                         try {
                             Pet newPet = new Pet(petData[0], Integer.parseInt(petData[1]));
-                            myPets.addPet(newPet);
-                            petCount++;
+                            if (myPets.addPet(newPet)) {
+                                petCount++;
+                            }
+
                         } catch (Exception ex) {
                             System.out.println("\nUnable to store this pet Data: " + petInfo);
                             break;

@@ -51,18 +51,28 @@ public class PetDatabase {
     }
     
     /**
-     * Add pet to petsArrayList. 
+     * Add pet to petsArrayList. Updated to return boolean value indicating 
+     * success or failure.
      * @param pet 
+     * @return true if Pet is added, false if not added 
      */
-    public void addPet(Pet pet) {
+    public boolean addPet(Pet pet) {
         /*
          * Update for Week 2: limit size to 5 pets
          */
         if (this.pets.size() < this.maxPets) {
-            this.pets.add(pet);
+            /*
+             * Update for Week 2: Restrict pet ages to specified range
+             */
+            if(pet.checkAge(pet.getAge())) {
+                this.pets.add(pet);
+                return true;
+            }
+            
         } else {
             System.err.println("Error: Database is full. Only " + this.maxPets + " spots available.");
         }
+        return false;
     }
     
     /**

@@ -104,7 +104,9 @@ public class CSC422Assignment1Ahnell {
                             }
 
                         } catch (Exception ex) {
-                            System.out.println("\nUnable to store this pet Data: " + petInfo);
+                            System.out.println("\nError: Unable to store this pet Data: " + petInfo);
+                            //System.err.println("\nError: Unable to store this pet Data: " + petInfo);
+
                             break;
                         }
                     }

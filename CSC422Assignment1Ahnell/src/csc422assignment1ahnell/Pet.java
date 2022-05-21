@@ -59,7 +59,7 @@ public class Pet {
      * @return true if within age range, false if not
      */
     public boolean checkAge(int age) {
-        if (this.minAge <= age && age <= this.maxAge) {
+        if (Pet.minAge <= age && age <= Pet.maxAge) {
             return true;
         } else {
             System.err.println("Error: " + age + " is not a valid age.");

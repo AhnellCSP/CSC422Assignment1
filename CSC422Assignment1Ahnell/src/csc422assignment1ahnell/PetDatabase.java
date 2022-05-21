@@ -28,6 +28,11 @@ import java.util.Scanner;
  * @author lisaahnell
  */
 public class PetDatabase {
+    
+    /*
+     * Update for Week 2: maximum number of pets allowed
+     */
+    private int maxPets = 5;
     private List<Pet> pets;
 
     public PetDatabase() {
@@ -50,7 +55,14 @@ public class PetDatabase {
      * @param pet 
      */
     public void addPet(Pet pet) {
-        this.pets.add(pet);
+        /*
+         * Update for Week 2: limit size to 5 pets
+         */
+        if (this.pets.size() < this.maxPets) {
+            this.pets.add(pet);
+        } else {
+            System.err.println("Error: Database is full. Only " + this.maxPets + " spots available.");
+        }
     }
     
     /**

@@ -225,21 +225,24 @@ public class PetDatabase {
         return pets;
     }
     
-    private void savePets(File file) {
+    public void savePets(File file) {
         PrintWriter output = null;
         try {
             if (file.exists()) {
-                System.out.println("Current pet data will be overwritten");
+                //System.out.println("Most recent pet data will overwrite older data.");
             }   
             output = new PrintWriter(file);
             // Write all Pets in PetDatabase to file
             for(Pet p: pets) {
                 // Add name to file
                 output.print(p.getName());
+                //System.out.println("Name: " + p.getName() + " written to file.");
                 // Add delimiter
                 output.print("|");
+                //System.out.println("Delimiter \"|\" written to file.");
                 // Add age to file, end of line of pet data
                 output.println(p.getAge());
+                //System.out.println("Age: " + p.getAge() + " written to file.");
             }
         } catch (FileNotFoundException ex) {
             System.out.println("File not found, unable to save Pet data.");

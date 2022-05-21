@@ -157,7 +157,7 @@ public class CSC422Assignment1Ahnell {
                     System.out.print("\nEnter the pet ID to remove: ");
                     searchTerm = input.nextLine();
                     try {
-                        // Age to search for
+                        // Pet to search for
                         int targetID = Integer.parseInt(searchTerm);
                         Pet targetPet = myPets.findPetById(targetID);
                         myPets.removePet(targetID);
@@ -165,7 +165,12 @@ public class CSC422Assignment1Ahnell {
                         //break;
                        
                     } catch (Exception ex) {
-                        System.out.println("\nUnable to remove pet with ID: " + searchTerm);
+                        /*
+                         * Update for Week 2: ID input must be an index of the array
+                         * If user inputs invalid ID value, notify them of error. 
+                         * Error message updated to match example.
+                         */
+                        System.out.println("\nError: ID " + searchTerm + " does not exist.");
                         break;
                     }
                     break;

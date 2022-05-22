@@ -12,6 +12,8 @@
  * 05/15/2022
  * Modified:
  * 05/19/2022: Added load from file functionality
+ * 05/20/2022: Added save to file, error handling.
+ * 05/21/2022: Bugfix (breaking out of add pets function if enter invalid info)
  */
 package csc422assignment1ahnell;
 
@@ -104,10 +106,10 @@ public class CSC422Assignment1Ahnell {
                             }
 
                         } catch (Exception ex) {
-                            System.out.println("\nError: Unable to store this pet Data: " + petInfo);
+                            System.out.println("\nError: Unable to store this pet data: " + petInfo);
                             //System.err.println("\nError: Unable to store this pet Data: " + petInfo);
-
-                            break;
+                            continue;
+                            //break;
                         }
                     }
                     break;

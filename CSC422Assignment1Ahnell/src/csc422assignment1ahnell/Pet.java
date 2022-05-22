@@ -9,6 +9,7 @@
  * Lisa Ahnell
  * ahnelll@csp.edu
  * 05/15/2022
+ * 5/20/2022: Added error handling.
  */
 package csc422assignment1ahnell;
 

@@ -13,6 +13,7 @@
  * 
  * Modified:
  * 05/19/2022: Added load from file functionality
+ * 5/20/2022: Added save to file, error handling.
  */
 package csc422assignment1ahnell;
 
